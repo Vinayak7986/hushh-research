@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Plus, Trash2, UsersRound } from "@/components/icons";
+import { Plus, Trash2, UsersRound, Share2 } from "@/components/icons";
 import { ConnectionPersonAvatar } from "@/components/connections/connection-person-avatar";
 import { PeopleOrbit } from "@/components/connect/people-orbit";
 import { CircleAvatar } from "./circle-photo-editor";
@@ -37,6 +37,7 @@ export function LivingCirclePanel({
   onRetry,
   groupPhotoUrl,
   showGroupIdentity = false,
+  onShareLink,
 }: {
   circleName: string;
   members: readonly OneLocationCircleMember[];
@@ -58,6 +59,7 @@ export function LivingCirclePanel({
   onRetry: () => void;
   groupPhotoUrl?: string | null;
   showGroupIdentity?: boolean;
+  onShareLink?: () => void;
 }) {
   const [overCircle, setOverCircle] = useState(false);
   const [overRemoveZone, setOverRemoveZone] = useState(false);
@@ -187,6 +189,20 @@ export function LivingCirclePanel({
         <p className="mt-1 text-center text-xs text-[color:var(--app-secondary-label)]">
           Room for the people you choose.
         </p>
+      ) : null}
+
+      {onShareLink ? (
+        <div className="mt-4 flex justify-center">
+          <Button
+            type="button"
+            variant="outline"
+            className="gap-2 rounded-full border border-[color:var(--app-card-border-standard)] bg-[color:var(--app-card-surface-default-solid)]"
+            onClick={onShareLink}
+          >
+            <Share2 className="size-4" />
+            Share Invite Link
+          </Button>
+        </div>
       ) : null}
 
       {canInvite || onRemove ? (

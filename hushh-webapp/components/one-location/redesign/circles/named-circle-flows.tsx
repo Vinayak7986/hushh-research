@@ -2183,6 +2183,17 @@ export function CircleDetailFlow({
               loadingMore={peopleLoadingMore}
               onLoadMore={() => void loadEligibleConnections({ page: peoplePage + 1, append: true, query: peopleSearch })}
               onRetry={() => void loadEligibleConnections({ page: 1, query: peopleSearch })}
+              onShareLink={
+                canViewInviteCode
+                  ? () => {
+                      if (inviteCode) {
+                        void onShareCode(circle, inviteCode.code);
+                      } else {
+                        setInviteCodeSheetOpen(true);
+                      }
+                    }
+                  : undefined
+              }
             />
           ) : null}
 
